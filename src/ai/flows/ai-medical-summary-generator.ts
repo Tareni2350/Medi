@@ -2,17 +2,11 @@
 'use server';
 /**
  * @fileOverview This file defines a Genkit flow for generating an AI-powered medical summary
- * from integrated patient health records. It processes conditions, allergies, medications,
- * abnormal observations, and procedures to provide a concise, doctor-friendly overview.
- *
- * - generateMedicalSummary - A function that handles the AI medical summary generation process.
- * - AIMedicalSummaryInput - The input type for the generateMedicalSummary function.
- * - AIMedicalSummaryOutput - The return type for the generateMedicalSummary function.
+ * from integrated patient health records.
  */
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
-import { googleAI } from '@genkit-ai/google-genai';
 
 const AIMedicalSummaryInputSchema = z.object({
   abhaId: z.string().describe('The ABHA ID of the patient.').min(1),
@@ -33,12 +27,16 @@ const AIMedicalSummaryOutputSchema = z.object({
 export type AIMedicalSummaryOutput = z.infer<typeof AIMedicalSummaryOutputSchema>;
 
 export async function generateMedicalSummary(input: AIMedicalSummaryInput): Promise<AIMedicalSummaryOutput> {
-  return aiMedicalSummaryGeneratorFlow(input);
+  try {
+    return await aiMedicalSummaryGeneratorFlow(input);
+  } catch (error: any) {
+    console.error('Flow execution failed:', error);
+    throw new Error(error.message || 'Internal AI processing error');
+  }
 }
 
 const medicalSummaryPrompt = ai.definePrompt({
   name: 'medicalSummaryPrompt',
-  model: googleAI.model('gemini-1.5-flash'),
   input: { schema: AIMedicalSummaryInputSchema },
   output: { schema: AIMedicalSummaryOutputSchema },
   prompt: `You are an AI assistant specialized in generating concise, doctor-friendly medical summaries from patient records.
@@ -100,7 +98,7 @@ const aiMedicalSummaryGeneratorFlow = ai.defineFlow(
   async (input) => {
     const { output } = await medicalSummaryPrompt(input);
     if (!output) {
-      throw new Error('Failed to generate medical summary.');
+      throw new Error('Failed to generate medical summary: Empty output from model.');
     }
     return output;
   }

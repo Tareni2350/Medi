@@ -1,13 +1,11 @@
 
 'use server';
 /**
- * @fileOverview This file defines a Genkit flow for an AI Clinical Assistant
- * that answers doctor queries about integrated patient records.
+ * @fileOverview This file defines a Genkit flow for an AI Clinical Assistant.
  */
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
-import { googleAI } from '@genkit-ai/google-genai';
 
 const ClinicalAssistantInputSchema = z.object({
   query: z.string().describe('The doctor\'s question about the patient.'),
@@ -19,7 +17,12 @@ const ClinicalAssistantOutputSchema = z.object({
 });
 
 export async function askClinicalAssistant(input: z.infer<typeof ClinicalAssistantInputSchema>): Promise<{ answer: string }> {
-  return clinicalAssistantFlow(input);
+  try {
+    return await clinicalAssistantFlow(input);
+  } catch (error: any) {
+    console.error('Clinical Assistant flow failed:', error);
+    throw new Error(error.message || 'Assistant failed to process query');
+  }
 }
 
 const clinicalAssistantFlow = ai.defineFlow(
@@ -30,7 +33,6 @@ const clinicalAssistantFlow = ai.defineFlow(
   },
   async (input) => {
     const { output } = await ai.generate({
-      model: googleAI.model('gemini-1.5-flash'),
       prompt: `You are a clinical assistant for a hospital. You have access to a patient's integrated medical record.
 Answer the following query from a doctor based strictly on the provided patient data.
 Be concise, accurate, and use clinical terminology.
