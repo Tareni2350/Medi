@@ -1,8 +1,7 @@
-
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { MessageSquare, Send, Loader2, User, Bot, Sparkles } from 'lucide-react';
+import { MessageSquare, Send, Loader2, User, Bot, Sparkles, RefreshCcw } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,24 +20,29 @@ export function ClinicalAssistant({ report }: { report: IntegratedReport }) {
   const [loading, setLoading] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
-  const handleSend = async () => {
-    if (!input.trim() || loading) return;
+  const handleSend = async (customQuery?: string) => {
+    const query = customQuery || input;
+    if (!query.trim() || loading) return;
 
-    const userMessage: Message = { role: 'user', content: input };
+    const userMessage: Message = { role: 'user', content: query };
     setMessages(prev => [...prev, userMessage]);
-    setInput('');
+    if (!customQuery) setInput('');
     setLoading(true);
 
     try {
       const result = await askClinicalAssistant({
-        query: input,
+        query: query,
         patientRecord: report,
       });
       const assistantMessage: Message = { role: 'assistant', content: result.answer };
       setMessages(prev => [...prev, assistantMessage]);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Assistant error:', err);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error while processing your request.' }]);
+      let errorMsg = 'Sorry, I encountered an error while processing your request.';
+      if (err.message?.includes('429') || err.message?.includes('quota')) {
+        errorMsg = 'I am currently experiencing high demand (rate limit reached). Please try again in a few seconds.';
+      }
+      setMessages(prev => [...prev, { role: 'assistant', content: errorMsg }]);
     } finally {
       setLoading(false);
     }
@@ -72,10 +76,10 @@ export function ClinicalAssistant({ report }: { report: IntegratedReport }) {
                   Ask me about this patient's history, lab trends, or medications.
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center">
-                  <Button variant="outline" size="sm" className="text-[10px]" onClick={() => setInput("What are the abnormal labs?")}>
+                  <Button variant="outline" size="sm" className="text-[10px]" onClick={() => handleSend("What are the abnormal labs?")}>
                     Abnormal labs?
                   </Button>
-                  <Button variant="outline" size="sm" className="text-[10px]" onClick={() => setInput("List current medications.")}>
+                  <Button variant="outline" size="sm" className="text-[10px]" onClick={() => handleSend("List current medications.")}>
                     Medications?
                   </Button>
                 </div>
