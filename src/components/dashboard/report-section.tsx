@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -5,6 +8,16 @@ import { type IntegratedReport } from "@/lib/data-service";
 import { Activity, Pill, FlaskConical, AlertTriangle, ShieldCheck, ClipboardList, Clock } from "lucide-react";
 
 export function ReportSection({ report }: { report: IntegratedReport }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="min-h-[400px] w-full bg-muted/10 animate-pulse rounded-xl" />;
+  }
+
   return (
     <div className="space-y-6">
       <Tabs defaultValue="conditions" className="w-full">
