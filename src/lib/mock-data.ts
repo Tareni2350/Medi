@@ -105,11 +105,21 @@ export const medications_df: Medication[] = [
 ];
 
 export const observations_df: Observation[] = [
+  // John Doe Trends
   { abhaId: '1234-5678-9012', testName: 'Fasting Blood Glucose', value: '145', unit: 'mg/dL', status: 'Abnormal', date: '2024-02-10', source: 'Government Diagnostic Lab' },
+  { abhaId: '1234-5678-9012', testName: 'Fasting Blood Glucose', value: '138', unit: 'mg/dL', status: 'Abnormal', date: '2023-11-05', source: 'City Clinic' },
+  { abhaId: '1234-5678-9012', testName: 'Fasting Blood Glucose', value: '152', unit: 'mg/dL', status: 'Abnormal', date: '2023-08-12', source: 'Health Checkup Center' },
   { abhaId: '1234-5678-9012', testName: 'HbA1c', value: '7.8', unit: '%', status: 'Abnormal', date: '2024-02-10', source: 'Government Diagnostic Lab' },
+  { abhaId: '1234-5678-9012', testName: 'HbA1c', value: '7.5', unit: '%', status: 'Abnormal', date: '2023-11-05', source: 'City Clinic' },
   { abhaId: '1234-5678-9012', testName: 'Serum Creatinine', value: '1.1', unit: 'mg/dL', status: 'Normal', date: '2024-02-10', source: 'Government Diagnostic Lab' },
+  
+  // Jane Smith
   { abhaId: '9876-5432-1098', testName: 'Peak Flow Rate', value: '350', unit: 'L/min', status: 'Normal', date: '2024-01-15', source: 'Community Clinic' },
+  { abhaId: '9876-5432-1098', testName: 'Peak Flow Rate', value: '320', unit: 'L/min', status: 'Normal', date: '2023-10-10', source: 'Community Clinic' },
+  
+  // Robert Brown
   { abhaId: '1111-2222-3333', testName: 'eGFR', value: '45', unit: 'mL/min/1.73m²', status: 'Abnormal', date: '2024-03-01', source: 'Main Lab' },
+  { abhaId: '1111-2222-3333', testName: 'eGFR', value: '48', unit: 'mL/min/1.73m²', status: 'Abnormal', date: '2023-12-15', source: 'Main Lab' },
 ];
 
 export const allergies_df: Allergy[] = [

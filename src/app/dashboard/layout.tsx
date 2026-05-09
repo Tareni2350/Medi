@@ -1,11 +1,33 @@
+'use client';
+
 import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { LayoutDashboard, Users, History, Settings, FileText, Bell, Search, ShieldCheck, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { patients_df } from "@/lib/mock-data";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const abhaId = searchParams.get('abhaId');
+
+  const navigationItems = [
+    {
+      name: "Clinical Overview",
+      href: `/dashboard${abhaId ? `?abhaId=${abhaId}` : ''}`,
+      icon: LayoutDashboard,
+      active: pathname === "/dashboard"
+    },
+    {
+      name: "Diagnostics",
+      href: `/dashboard/diagnostics${abhaId ? `?abhaId=${abhaId}` : ''}`,
+      icon: FileText,
+      active: pathname === "/dashboard/diagnostics"
+    }
+  ];
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-background">
@@ -21,22 +43,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <SidebarGroupLabel>Main Menu</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive>
-                      <Link href="/dashboard">
-                        <LayoutDashboard className="w-4 h-4" />
-                        <span>Clinical Overview</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
-                      <Link href="#">
-                        <FileText className="w-4 h-4" />
-                        <span>Diagnostics</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
+                  {navigationItems.map((item) => (
+                    <SidebarMenuItem key={item.name}>
+                      <SidebarMenuButton asChild isActive={item.active}>
+                        <Link href={item.href}>
+                          <item.icon className="w-4 h-4" />
+                          <span>{item.name}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
@@ -47,13 +63,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <SidebarMenu>
                   {patients_df.map((patient) => (
                     <SidebarMenuItem key={patient.abhaId}>
-                      <SidebarMenuButton asChild className="h-12">
-                        <Link href={`/dashboard?abhaId=${patient.abhaId}`} className="flex items-center gap-3">
+                      <SidebarMenuButton asChild isActive={abhaId === patient.abhaId} className="h-12">
+                        <Link href={`${pathname}?abhaId=${patient.abhaId}`} className="flex items-center gap-3">
                           <Avatar className="h-8 w-8 border">
                             <AvatarImage src={patient.avatar} alt={patient.name} />
                             <AvatarFallback>{patient.name.charAt(0)}</AvatarFallback>
                           </Avatar>
-                          <div className="flex flex-col items-start overflow-hidden">
+                          <div className="flex flex-col items-start overflow-hidden text-left">
                             <span className="text-sm font-medium truncate w-full">{patient.name}</span>
                             <span className="text-[10px] text-muted-foreground truncate w-full">{patient.abhaId}</span>
                           </div>
