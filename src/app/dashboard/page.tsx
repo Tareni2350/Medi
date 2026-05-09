@@ -5,7 +5,7 @@ import { ReportSection } from "@/components/dashboard/report-section";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 
 export default async function DashboardPage({
   searchParams,
