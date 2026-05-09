@@ -1,7 +1,9 @@
 import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import { LayoutDashboard, Users, History, Settings, FileText, Bell, Search, ShieldCheck } from "lucide-react";
+import { LayoutDashboard, Users, History, Settings, FileText, Bell, Search, ShieldCheck, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { patients_df } from "@/lib/mock-data";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -16,7 +18,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
-              <SidebarGroupLabel>Medical Dashboard</SidebarGroupLabel>
+              <SidebarGroupLabel>Main Menu</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
@@ -24,14 +26,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                       <Link href="/dashboard">
                         <LayoutDashboard className="w-4 h-4" />
                         <span>Clinical Overview</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
-                      <Link href="#">
-                        <Users className="w-4 h-4" />
-                        <span>Patients</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -48,7 +42,40 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </SidebarGroup>
 
             <SidebarGroup>
-              <SidebarGroupLabel>History & Logs</SidebarGroupLabel>
+              <SidebarGroupLabel>Recent Patient Records</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {patients_df.map((patient) => (
+                    <SidebarMenuItem key={patient.abhaId}>
+                      <SidebarMenuButton asChild className="h-12">
+                        <Link href={`/dashboard?abhaId=${patient.abhaId}`} className="flex items-center gap-3">
+                          <Avatar className="h-8 w-8 border">
+                            <AvatarImage src={patient.avatar} alt={patient.name} />
+                            <AvatarFallback>{patient.name.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <div className="flex flex-col items-start overflow-hidden">
+                            <span className="text-sm font-medium truncate w-full">{patient.name}</span>
+                            <span className="text-[10px] text-muted-foreground truncate w-full">{patient.abhaId}</span>
+                          </div>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild className="text-primary font-medium">
+                      <Link href="/" className="flex items-center gap-2">
+                        <Users className="w-4 h-4" />
+                        <span>Search All Patients</span>
+                        <ChevronRight className="w-3 h-3 ml-auto" />
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+
+            <SidebarGroup>
+              <SidebarGroupLabel>System</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
@@ -59,13 +86,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-
-            <SidebarGroup className="mt-auto">
-              <SidebarGroupContent>
-                <SidebarMenu>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
                       <Link href="#">
