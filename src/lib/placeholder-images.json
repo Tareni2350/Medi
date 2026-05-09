@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "doctor-avatar",
+      "description": "Professional doctor portrait",
+      "imageUrl": "https://picsum.photos/seed/doctor1/200/200",
+      "imageHint": "medical doctor"
+    },
+    {
+      "id": "patient-1",
+      "description": "Patient John Doe",
+      "imageUrl": "https://picsum.photos/seed/patient1/200/200",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "patient-2",
+      "description": "Patient Jane Smith",
+      "imageUrl": "https://picsum.photos/seed/patient2/200/200",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "patient-3",
+      "description": "Patient Robert Brown",
+      "imageUrl": "https://picsum.photos/seed/patient3/200/200",
+      "imageHint": "person portrait"
+    }
+  ]
 }
