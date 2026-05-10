@@ -7,6 +7,7 @@
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
+import { googleAI } from '@genkit-ai/google-genai';
 
 const AIMedicalSummaryInputSchema = z.object({
   abhaId: z.string().describe('The ABHA ID of the patient.').min(1),
@@ -37,6 +38,7 @@ export async function generateMedicalSummary(input: AIMedicalSummaryInput): Prom
 
 const medicalSummaryPrompt = ai.definePrompt({
   name: 'medicalSummaryPrompt',
+  model: 'googleai/gemini-1.5-flash',
   input: { schema: AIMedicalSummaryInputSchema },
   output: { schema: AIMedicalSummaryOutputSchema },
   prompt: `You are an AI assistant specialized in generating concise, doctor-friendly medical summaries from patient records.
@@ -96,7 +98,8 @@ const aiMedicalSummaryGeneratorFlow = ai.defineFlow(
     outputSchema: AIMedicalSummaryOutputSchema,
   },
   async (input) => {
-    const { output } = await medicalSummaryPrompt(input);
+    const response = await medicalSummaryPrompt(input);
+    const output = response.output;
     if (!output) {
       throw new Error('Failed to generate medical summary: Empty output from model.');
     }

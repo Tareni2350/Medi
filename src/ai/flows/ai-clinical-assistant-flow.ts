@@ -6,6 +6,7 @@
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
+import { googleAI } from '@genkit-ai/google-genai';
 
 const ClinicalAssistantInputSchema = z.object({
   query: z.string().describe('The doctor\'s question about the patient.'),
@@ -33,6 +34,7 @@ const clinicalAssistantFlow = ai.defineFlow(
   },
   async (input) => {
     const { output } = await ai.generate({
+      model: 'googleai/gemini-1.5-flash',
       prompt: `You are a clinical assistant for a hospital. You have access to a patient's integrated medical record.
 Answer the following query from a doctor based strictly on the provided patient data.
 Be concise, accurate, and use clinical terminology.
