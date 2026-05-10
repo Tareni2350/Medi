@@ -1,4 +1,3 @@
-
 'use server';
 /**
  * @fileOverview This file defines a Genkit flow for generating an AI-powered medical summary
@@ -38,7 +37,7 @@ export async function generateMedicalSummary(input: AIMedicalSummaryInput): Prom
 
 const medicalSummaryPrompt = ai.definePrompt({
   name: 'medicalSummaryPrompt',
-  model: 'googleai/gemini-1.5-flash',
+  model: googleAI.model('gemini-1.5-flash'),
   input: { schema: AIMedicalSummaryInputSchema },
   output: { schema: AIMedicalSummaryOutputSchema },
   prompt: `You are an AI assistant specialized in generating concise, doctor-friendly medical summaries from patient records.
@@ -98,8 +97,7 @@ const aiMedicalSummaryGeneratorFlow = ai.defineFlow(
     outputSchema: AIMedicalSummaryOutputSchema,
   },
   async (input) => {
-    const response = await medicalSummaryPrompt(input);
-    const output = response.output;
+    const { output } = await medicalSummaryPrompt(input);
     if (!output) {
       throw new Error('Failed to generate medical summary: Empty output from model.');
     }

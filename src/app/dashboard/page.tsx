@@ -2,7 +2,6 @@ import { getIntegratedPatientData } from "@/lib/data-service";
 import { PatientHeader } from "@/components/dashboard/patient-header";
 import { AISummaryCard } from "@/components/dashboard/ai-summary-card";
 import { ReportSection } from "@/components/dashboard/report-section";
-import { ClinicalAssistant } from "@/components/dashboard/clinical-assistant";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -82,10 +81,6 @@ export default async function DashboardPage({
         <div className="space-y-6">
           <div className="print:mb-8">
             <AISummaryCard report={report} />
-          </div>
-          
-          <div className="no-print">
-            <ClinicalAssistant report={report} />
           </div>
           
           <div className="p-6 bg-white rounded-xl shadow-sm border space-y-4 break-inside-avoid">
