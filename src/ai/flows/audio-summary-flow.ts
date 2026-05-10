@@ -1,4 +1,3 @@
-
 'use server';
 /**
  * @fileOverview This file defines a Genkit flow for converting a text summary to audio.
@@ -6,7 +5,6 @@
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
-import { googleAI } from '@genkit-ai/google-genai';
 import wav from 'wav';
 
 const AudioSummaryInputSchema = z.string().describe('The clinical text summary to convert to speech.');
@@ -23,7 +21,7 @@ const textToSpeechFlow = ai.defineFlow(
   },
   async (text) => {
     const { media } = await ai.generate({
-      model: googleAI.model('gemini-2.5-flash-preview-tts'),
+      model: 'googleai/gemini-2.5-flash-preview-tts',
       config: {
         responseModalities: ['AUDIO'],
         speechConfig: {

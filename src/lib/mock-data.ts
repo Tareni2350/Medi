@@ -48,7 +48,6 @@ export interface Encounter {
   abhaId: string;
   date: string;
   type: string;
-  doctor: string;
 }
 
 export const patients_df: Patient[] = [
@@ -123,8 +122,8 @@ export const procedures_df: Procedure[] = [
 ];
 
 export const encounters_df: Encounter[] = [
-  { abhaId: '1234-5678-9012', date: '2024-02-10', type: 'Outpatient Follow-up', doctor: 'Clinical Provider A' },
-  { abhaId: '1234-5678-9012', date: '2023-11-05', type: 'Emergency Visit', doctor: 'Clinical Provider B' },
-  { abhaId: '9876-5432-1098', date: '2024-01-15', type: 'General Checkup', doctor: 'Clinical Provider C' },
-  { abhaId: '1111-2222-3333', date: '2024-03-01', type: 'Nephrology Consultation', doctor: 'Clinical Provider D' },
+  { abhaId: '1234-5678-9012', date: '2024-02-10', type: 'Outpatient Follow-up' },
+  { abhaId: '1234-5678-9012', date: '2023-11-05', type: 'Emergency Visit' },
+  { abhaId: '9876-5432-1098', date: '2024-01-15', type: 'General Checkup' },
+  { abhaId: '1111-2222-3333', date: '2024-03-01', type: 'Nephrology Consultation' },
 ];

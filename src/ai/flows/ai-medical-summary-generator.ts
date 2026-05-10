@@ -6,7 +6,6 @@
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
-import { googleAI } from '@genkit-ai/google-genai';
 
 const AIMedicalSummaryInputSchema = z.object({
   abhaId: z.string().describe('The ABHA ID of the patient.').min(1),
@@ -37,7 +36,7 @@ export async function generateMedicalSummary(input: AIMedicalSummaryInput): Prom
 
 const medicalSummaryPrompt = ai.definePrompt({
   name: 'medicalSummaryPrompt',
-  model: googleAI.model('gemini-1.5-flash'),
+  model: 'googleai/gemini-1.5-flash',
   input: { schema: AIMedicalSummaryInputSchema },
   output: { schema: AIMedicalSummaryOutputSchema },
   prompt: `You are an AI assistant specialized in generating concise, doctor-friendly medical summaries from patient records.

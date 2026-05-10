@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PatientUploadForm } from "@/components/admin/patient-upload-form";
 import { Activity, Users, Database, ShieldAlert, CheckCircle2 } from "lucide-react";
@@ -8,7 +7,7 @@ export default function AdminDashboardPage() {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
-        <p className="text-muted-foreground">Manage hospital data synchronization and patient registrations.</p>
+        <p className="text-muted-foreground">Manage data synchronization and patient registrations.</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -60,31 +59,31 @@ export default function AdminDashboardPage() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Recent Upload Activity</CardTitle>
+              <CardTitle className="text-lg">Recent Sync Activity</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <ActivityItem 
                   title="Lab Report Sync" 
-                  facility="Diagnostic Center Alpha" 
+                  details="Central Node A" 
                   time="2 mins ago" 
                   status="Success" 
                 />
                 <ActivityItem 
                   title="Patient Registration" 
-                  facility="General Hospital #402" 
+                  details="Clinical Node B" 
                   time="15 mins ago" 
                   status="Success" 
                 />
                 <ActivityItem 
                   title="Medication Log Update" 
-                  facility="Pharmacy Unit 12" 
+                  details="Pharmacy Node C" 
                   time="1 hour ago" 
                   status="Success" 
                 />
                 <ActivityItem 
                   title="Critical Alert Triggered" 
-                  facility="Emergency Services" 
+                  details="Emergency Node D" 
                   time="3 hours ago" 
                   status="Alert" 
                 />
@@ -109,7 +108,7 @@ export default function AdminDashboardPage() {
                 <span className="text-green-600 font-bold">Connected</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Local SQL Cache</span>
+                <span className="text-muted-foreground">Clinical Ledger</span>
                 <span className="text-green-600 font-bold">Active</span>
               </div>
             </CardContent>
@@ -135,13 +134,13 @@ function StatCard({ title, value, description, icon: Icon, trend }: any) {
   );
 }
 
-function ActivityItem({ title, facility, time, status }: any) {
+function ActivityItem({ title, details, time, status }: any) {
   return (
     <div className="flex items-start gap-3 text-sm pb-4 last:pb-0">
       <div className={`mt-1 w-2 h-2 rounded-full shrink-0 ${status === 'Alert' ? 'bg-destructive' : 'bg-primary'}`} />
       <div className="space-y-1">
         <p className="font-medium leading-none">{title}</p>
-        <p className="text-xs text-muted-foreground">{facility} • {time}</p>
+        <p className="text-xs text-muted-foreground">{details} • {time}</p>
       </div>
     </div>
   );

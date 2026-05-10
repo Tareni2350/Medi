@@ -188,7 +188,7 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                 </div>
                 <div>
                   <div className="font-bold text-sm">{enc.type}</div>
-                  <div className="text-xs text-muted-foreground">{enc.date} • {enc.doctor}</div>
+                  <div className="text-xs text-muted-foreground">{enc.date}</div>
                 </div>
               </div>
             ))}
@@ -205,7 +205,7 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
               <div key={i} className="p-3 bg-red-50 border-l-4 border-red-500 text-sm flex items-start gap-3">
                 <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold">Severe Allergy:</span> {a.allergy} detected. Extreme caution with prescribing.
+                  <span className="font-bold">Severe Allergy:</span> {a.allergy} detected. Extreme caution with clinical decisions.
                 </div>
               </div>
             ))}
