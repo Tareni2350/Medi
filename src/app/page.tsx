@@ -1,4 +1,3 @@
-
 import { redirect } from 'next/navigation';
 import { Search, ShieldCheck, Database, Zap, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -38,8 +37,8 @@ export default function Home() {
             <form action={handleSearch} className="flex gap-3 max-w-md mx-auto">
               <Input 
                 name="abhaId" 
-                placeholder="e.g. 1234-5678-9012" 
-                className="flex-1 h-12 text-lg"
+                placeholder="e.g. ABHA-1001" 
+                className="flex-1 h-12 text-lg uppercase"
                 required
               />
               <Button type="submit" size="lg" className="h-12 px-8">
@@ -49,7 +48,7 @@ export default function Home() {
             </form>
             <div className="mt-6 flex flex-col items-center gap-4">
               <div className="flex justify-center gap-6 text-sm text-muted-foreground">
-                <p>Demo IDs: <code className="bg-muted px-1 rounded">1234-5678-9012</code>, <code className="bg-muted px-1 rounded">9876-5432-1098</code></p>
+                <p>Demo IDs: <code className="bg-muted px-1 rounded">ABHA-1001</code>, <code className="bg-muted px-1 rounded">ABHA-1002</code>, <code className="bg-muted px-1 rounded">ABHA-1003</code></p>
               </div>
               <div className="h-px w-full bg-border max-w-xs" />
               <Button variant="outline" asChild size="sm" className="text-muted-foreground">

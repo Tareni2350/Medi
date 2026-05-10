@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -7,11 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Loader2, UserPlus, UploadCloud } from "lucide-react";
 
 export function PatientUploadForm() {
   const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ export function PatientUploadForm() {
     
     toast({
       title: "Patient Registered Successfully",
-      description: "The record has been encrypted and synced with the ABDM gateway.",
+      description: "The record has been encrypted and synced with the clinical network.",
     });
     
     setLoading(false);
@@ -34,12 +34,12 @@ export function PatientUploadForm() {
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <Label htmlFor="abhaId">Patient ABHA ID</Label>
-          <Input id="abhaId" placeholder="1234-5678-9012" required />
-          <p className="text-[10px] text-muted-foreground italic">Must be a valid 14-digit ABHA number</p>
+          <Input id="abhaId" placeholder="ABHA-1000" required className="uppercase" />
+          <p className="text-[10px] text-muted-foreground italic">Standard format: ABHA-XXXX</p>
         </div>
         <div className="space-y-2">
           <Label htmlFor="name">Full Name</Label>
-          <Input id="name" placeholder="John Doe" required />
+          <Input id="name" placeholder="Enter patient name" required />
         </div>
       </div>
 
