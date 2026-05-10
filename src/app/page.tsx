@@ -1,8 +1,10 @@
+
 import { redirect } from 'next/navigation';
-import { Search, ShieldCheck, Database, Zap } from 'lucide-react';
+import { Search, ShieldCheck, Database, Zap, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from "next/link";
 
 export default function Home() {
   async function handleSearch(formData: FormData) {
@@ -45,8 +47,17 @@ export default function Home() {
                 Search
               </Button>
             </form>
-            <div className="mt-6 flex justify-center gap-6 text-sm text-muted-foreground">
-              <p>Demo IDs: <code className="bg-muted px-1 rounded">1234-5678-9012</code>, <code className="bg-muted px-1 rounded">9876-5432-1098</code></p>
+            <div className="mt-6 flex flex-col items-center gap-4">
+              <div className="flex justify-center gap-6 text-sm text-muted-foreground">
+                <p>Demo IDs: <code className="bg-muted px-1 rounded">1234-5678-9012</code>, <code className="bg-muted px-1 rounded">9876-5432-1098</code></p>
+              </div>
+              <div className="h-px w-full bg-border max-w-xs" />
+              <Button variant="outline" asChild size="sm" className="text-muted-foreground">
+                <Link href="/admin">
+                  <Lock className="w-3 h-3 mr-2" />
+                  Hospital Administrator Portal
+                </Link>
+              </Button>
             </div>
           </CardContent>
         </Card>
