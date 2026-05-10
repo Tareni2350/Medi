@@ -68,7 +68,6 @@ export default async function DashboardPage({
         <DashboardActions />
       </div>
 
-      {/* Print-only title */}
       <div className="hidden print:block text-center border-b pb-4 mb-8">
         <h1 className="text-3xl font-bold">MediSync AI - Integrated Patient Report</h1>
         <p className="text-sm text-muted-foreground">Confidential Medical Record Summary</p>
@@ -92,10 +91,10 @@ export default async function DashboardPage({
           <div className="p-6 bg-white rounded-xl shadow-sm border space-y-4 break-inside-avoid">
             <h3 className="font-bold border-b pb-2">Data Sources</h3>
             <div className="space-y-3">
-              <SourceIndicator name="Government Hospital A" type="Hospital" />
-              <SourceIndicator name="Government Diagnostic Lab" type="Diagnostic" />
-              <SourceIndicator name="Government Pharmacy" type="Pharmacy" />
-              <SourceIndicator name="Emergency Records" type="Alert" />
+              <SourceIndicator name="Regional Healthcare Facility" type="Hospital" />
+              <SourceIndicator name="Integrated Diagnostic Lab" type="Diagnostic" />
+              <SourceIndicator name="Network Pharmacy" type="Pharmacy" />
+              <SourceIndicator name="Consolidated Health Records" type="Alert" />
             </div>
             <p className="text-[10px] text-muted-foreground pt-4 italic">
               Record pulled from ABDM Gateway v2.4. Data is aggregated using ABHA-linked secure tunnels.
