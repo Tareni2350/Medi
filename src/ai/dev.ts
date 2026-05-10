@@ -1,5 +1,4 @@
 import { config } from 'dotenv';
 config();
 
-import '@/ai/flows/ai-medical-summary-generator.ts';
-import '@/ai/flows/audio-summary-flow.ts';
+// AI flows are currently disabled as per user request to remove AI summary and assistant features.

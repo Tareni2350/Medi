@@ -1,8 +1,7 @@
 import { getIntegratedPatientData } from "@/lib/data-service";
 import { PatientHeader } from "@/components/dashboard/patient-header";
-import { AISummaryCard } from "@/components/dashboard/ai-summary-card";
 import { ReportSection } from "@/components/dashboard/report-section";
-import { AlertCircle, ArrowLeft } from "lucide-react";
+import { AlertCircle, ArrowLeft, Info } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { DashboardActions } from "@/components/dashboard/dashboard-actions";
@@ -73,20 +72,29 @@ export default async function DashboardPage({
 
       <PatientHeader patient={report.patient} />
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
+      <div className="grid lg:grid-cols-4 gap-8">
+        <div className="lg:col-span-3 space-y-8">
           <ReportSection report={report} />
         </div>
         <div className="space-y-6">
-          <div className="print:mb-8">
-            <AISummaryCard report={report} />
-          </div>
-          
           <div className="p-6 bg-white rounded-xl shadow-sm border space-y-4 break-inside-avoid">
-            <h3 className="font-bold border-b pb-2">System Information</h3>
-            <p className="text-xs text-muted-foreground italic leading-relaxed">
-              Records are consolidated from the ABDM Gateway v2.4. All data is aggregated using secure ABHA-linked tunnels to ensure longitudinal record integrity.
-            </p>
+            <div className="flex items-center gap-2 font-bold border-b pb-2">
+              <Info className="w-4 h-4 text-primary" />
+              System Information
+            </div>
+            <div className="space-y-3">
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Network Status</p>
+                <p className="text-xs font-medium text-green-600">Secure Sync Active</p>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Data Protocol</p>
+                <p className="text-xs">ABDM Gateway v2.4</p>
+              </div>
+              <p className="text-xs text-muted-foreground italic leading-relaxed pt-2">
+                Records are consolidated using secure ABHA-linked tunnels to ensure longitudinal record integrity across all clinical nodes.
+              </p>
+            </div>
           </div>
         </div>
       </div>
