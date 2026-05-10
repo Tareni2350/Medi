@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { Search, ShieldCheck, Database, Zap, Lock } from 'lucide-react';
+import { Search, ShieldCheck, Database, LayoutDashboard, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,7 +23,7 @@ export default function Home() {
             <h1 className="text-4xl font-bold tracking-tight text-foreground">MediSync AI</h1>
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Universal Healthcare Interoperability Powered by AI. 
+            Universal Healthcare Interoperability Platform. 
             Access fragmented records with a single ABHA ID.
           </p>
         </div>
@@ -70,11 +70,11 @@ export default function Home() {
             <p className="text-sm text-muted-foreground">Connects fragmented data from labs, hospitals, and pharmacies instantly.</p>
           </div>
           <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm border">
-            <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent mb-4">
-              <Zap className="w-6 h-6" />
+            <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mb-4">
+              <LayoutDashboard className="w-6 h-6" />
             </div>
-            <h3 className="font-bold text-lg mb-2">AI Summary</h3>
-            <p className="text-sm text-muted-foreground">Clinical LLM generates doctor-friendly summaries from raw diagnostic data.</p>
+            <h3 className="font-bold text-lg mb-2">Clinical Insights</h3>
+            <p className="text-sm text-muted-foreground">Interactive diagnostic trends and longitudinal history visualization.</p>
           </div>
           <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm border">
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">

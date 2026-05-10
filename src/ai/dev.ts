@@ -1,4 +1,2 @@
-import { config } from 'dotenv';
-config();
-
-// AI flows are currently disabled as per user request to remove AI summary and assistant features.
+// AI functionality has been removed as per user request.
+export {};
