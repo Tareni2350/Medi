@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity, TrendingUp } from "lucide-react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
@@ -16,6 +17,25 @@ interface DiagnosticsChartsProps {
 }
 
 export function DiagnosticsCharts({ glucoseData, hba1cData }: DiagnosticsChartsProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="grid md:grid-cols-2 gap-6 h-[400px]">
+        <Card className="flex items-center justify-center">
+          <p className="text-sm text-muted-foreground italic">Loading Glucose Trends...</p>
+        </Card>
+        <Card className="flex items-center justify-center">
+          <p className="text-sm text-muted-foreground italic">Loading HbA1c Analysis...</p>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="grid md:grid-cols-2 gap-6">
       <Card>
