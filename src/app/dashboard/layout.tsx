@@ -1,14 +1,12 @@
-
 'use client';
 
 import { Suspense } from 'react';
 import { SidebarProvider, Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import { LayoutDashboard, Users, History, Settings, FileText, Bell, Search, ShieldCheck, ChevronRight, Loader2 } from "lucide-react";
+import { LayoutDashboard, Users, History, Settings, FileText, Bell, Search, ShieldCheck, ChevronRight, Loader2, User as UserIcon } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { patients_df } from "@/lib/mock-data";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 function DashboardInnerLayout({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
@@ -66,10 +64,9 @@ function DashboardInnerLayout({ children }: { children: React.ReactNode }) {
                   <SidebarMenuItem key={patient.abhaId}>
                     <SidebarMenuButton asChild isActive={abhaId === patient.abhaId} className="h-12">
                       <Link href={`${pathname}?abhaId=${patient.abhaId}`} className="flex items-center gap-3">
-                        <Avatar className="h-8 w-8 border">
-                          <AvatarImage src={patient.avatar} alt={patient.name} />
-                          <AvatarFallback>{patient.name.charAt(0)}</AvatarFallback>
-                        </Avatar>
+                        <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                          <UserIcon className="h-4 w-4 text-primary" />
+                        </div>
                         <div className="flex flex-col items-start overflow-hidden text-left">
                           <span className="text-sm font-medium truncate w-full">{patient.name}</span>
                           <span className="text-[10px] text-muted-foreground truncate w-full">{patient.abhaId}</span>
@@ -135,7 +132,7 @@ function DashboardInnerLayout({ children }: { children: React.ReactNode }) {
               <Bell className="w-5 h-5 text-muted-foreground" />
             </Button>
             <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
-              DS
+              MS
             </div>
           </div>
         </header>

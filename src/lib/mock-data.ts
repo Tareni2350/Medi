@@ -6,7 +6,6 @@ export interface Patient {
   bloodGroup: string;
   email: string;
   phone: string;
-  avatar: string;
 }
 
 export interface Condition {
@@ -53,33 +52,30 @@ export interface Encounter {
 export const patients_df: Patient[] = [
   {
     abhaId: '1234-5678-9012',
-    name: 'John Doe',
+    name: 'Arjun Sharma',
     age: 45,
     gender: 'Male',
     bloodGroup: 'O+',
-    email: 'john.doe@example.com',
+    email: 'arjun.sharma@example.com',
     phone: '+91 98765 43210',
-    avatar: 'https://picsum.photos/seed/patient1/200/200',
   },
   {
     abhaId: '9876-5432-1098',
-    name: 'Jane Smith',
+    name: 'Priya Patel',
     age: 32,
     gender: 'Female',
     bloodGroup: 'A-',
-    email: 'jane.smith@example.com',
+    email: 'priya.patel@example.com',
     phone: '+91 87654 32109',
-    avatar: 'https://picsum.photos/seed/patient2/200/200',
   },
   {
     abhaId: '1111-2222-3333',
-    name: 'Robert Brown',
+    name: 'Rajesh Kumar',
     age: 58,
     gender: 'Male',
     bloodGroup: 'B+',
-    email: 'robert.brown@example.com',
+    email: 'rajesh.kumar@example.com',
     phone: '+91 76543 21098',
-    avatar: 'https://picsum.photos/seed/patient3/200/200',
   },
 ];
 
