@@ -5,7 +5,6 @@ import { ReportSection } from "@/components/dashboard/report-section";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { DashboardActions } from "@/components/dashboard/dashboard-actions";
 
 export default async function DashboardPage({
@@ -62,7 +61,7 @@ export default async function DashboardPage({
       <div className="flex items-center justify-between no-print">
         <div>
           <h1 className="text-2xl font-bold">Integrated Clinical History</h1>
-          <p className="text-muted-foreground">Comprehensive view aggregated from fragmented healthcare sources</p>
+          <p className="text-muted-foreground">Comprehensive view aggregated from fragmented healthcare data</p>
         </div>
         <DashboardActions />
       </div>
@@ -84,33 +83,13 @@ export default async function DashboardPage({
           </div>
           
           <div className="p-6 bg-white rounded-xl shadow-sm border space-y-4 break-inside-avoid">
-            <h3 className="font-bold border-b pb-2">Data Sources</h3>
-            <div className="space-y-3">
-              <SourceIndicator name="Regional Healthcare Facility" type="Hospital" />
-              <SourceIndicator name="Integrated Diagnostic Lab" type="Diagnostic" />
-              <SourceIndicator name="Network Pharmacy" type="Pharmacy" />
-              <SourceIndicator name="Consolidated Health Records" type="Alert" />
-            </div>
-            <p className="text-[10px] text-muted-foreground pt-4 italic">
-              Record pulled from ABDM Gateway v2.4. Data is aggregated using ABHA-linked secure tunnels.
+            <h3 className="font-bold border-b pb-2">System Information</h3>
+            <p className="text-xs text-muted-foreground italic leading-relaxed">
+              Records are consolidated from the ABDM Gateway v2.4. All data is aggregated using secure ABHA-linked tunnels to ensure longitudinal record integrity.
             </p>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function SourceIndicator({ name, type }: { name: string; type: string }) {
-  return (
-    <div className="flex items-center justify-between text-sm">
-      <div className="flex items-center gap-2">
-        <div className="w-2 h-2 rounded-full bg-accent" />
-        <span className="font-medium">{name}</span>
-      </div>
-      <Badge variant="outline" className="text-[10px] uppercase font-bold text-muted-foreground">
-        {type}
-      </Badge>
     </div>
   );
 }

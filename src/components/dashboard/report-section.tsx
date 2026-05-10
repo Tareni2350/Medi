@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { type IntegratedReport } from "@/lib/data-service";
-import { Activity, Pill, FlaskConical, AlertTriangle, ShieldCheck, ClipboardList, Clock } from "lucide-react";
+import { Activity, Pill, FlaskConical, AlertTriangle, ClipboardList, Clock } from "lucide-react";
 
 export function ReportSection({ report }: { report: IntegratedReport }) {
   const [mounted, setMounted] = useState(false);
@@ -52,7 +52,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                   <TableRow>
                     <TableHead>Condition</TableHead>
                     <TableHead>Diagnosed Date</TableHead>
-                    <TableHead>Source Facility</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -60,7 +59,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                     <TableRow key={idx}>
                       <TableCell className="font-semibold">{item.condition}</TableCell>
                       <TableCell>{item.date}</TableCell>
-                      <TableCell className="text-muted-foreground">{item.source}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -76,7 +74,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                     <TableHead>Medication</TableHead>
                     <TableHead>Dosage</TableHead>
                     <TableHead>Frequency</TableHead>
-                    <TableHead>Dispensed By</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -85,7 +82,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                       <TableCell className="font-semibold">{item.medication}</TableCell>
                       <TableCell>{item.dosage}</TableCell>
                       <TableCell>{item.frequency}</TableCell>
-                      <TableCell className="text-muted-foreground">{item.source}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -102,7 +98,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                     <TableHead>Result</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Date</TableHead>
-                    <TableHead>Lab Source</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -116,7 +111,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                         </Badge>
                       </TableCell>
                       <TableCell>{item.date}</TableCell>
-                      <TableCell className="text-muted-foreground">{item.source}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -131,7 +125,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                   <TableRow>
                     <TableHead>Allergen</TableHead>
                     <TableHead>Severity</TableHead>
-                    <TableHead>Recorded Source</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -146,7 +139,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                           {item.severity}
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-muted-foreground">{item.source}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -162,7 +154,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                     <TableHead>Procedure</TableHead>
                     <TableHead>Date</TableHead>
                     <TableHead>Outcome</TableHead>
-                    <TableHead>Facility</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -171,7 +162,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                       <TableCell className="font-semibold">{item.procedure}</TableCell>
                       <TableCell>{item.date}</TableCell>
                       <TableCell>{item.outcome}</TableCell>
-                      <TableCell className="text-muted-foreground">{item.source}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -199,10 +189,6 @@ export function ReportSection({ report }: { report: IntegratedReport }) {
                 <div>
                   <div className="font-bold text-sm">{enc.type}</div>
                   <div className="text-xs text-muted-foreground">{enc.date} • {enc.doctor}</div>
-                  <div className="text-xs mt-1 text-primary/80 flex items-center gap-1">
-                    <ShieldCheck className="w-3 h-3" />
-                    {enc.facility}
-                  </div>
                 </div>
               </div>
             ))}

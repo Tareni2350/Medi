@@ -81,7 +81,6 @@ export default async function DiagnosticsPage({
                 <TableHead>Date</TableHead>
                 <TableHead>Result</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Source Facility</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -95,7 +94,6 @@ export default async function DiagnosticsPage({
                       {item.status}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-muted-foreground">{item.source}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
