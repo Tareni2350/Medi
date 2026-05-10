@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Activity, TrendingUp } from "lucide-react";
+import { Activity, TrendingUp, Loader2 } from "lucide-react";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Line, LineChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
@@ -25,12 +25,14 @@ export function DiagnosticsCharts({ glucoseData, hba1cData }: DiagnosticsChartsP
 
   if (!mounted) {
     return (
-      <div className="grid md:grid-cols-2 gap-6 h-[400px]">
-        <Card className="flex items-center justify-center">
-          <p className="text-sm text-muted-foreground italic">Loading Glucose Trends...</p>
+      <div className="grid md:grid-cols-2 gap-6 min-h-[400px]">
+        <Card className="flex flex-col items-center justify-center p-12 text-center space-y-4">
+          <Loader2 className="w-8 h-8 text-primary animate-spin" />
+          <p className="text-sm text-muted-foreground italic">Preparing Glucose Trends...</p>
         </Card>
-        <Card className="flex items-center justify-center">
-          <p className="text-sm text-muted-foreground italic">Loading HbA1c Analysis...</p>
+        <Card className="flex flex-col items-center justify-center p-12 text-center space-y-4">
+          <Loader2 className="w-8 h-8 text-accent animate-spin" />
+          <p className="text-sm text-muted-foreground italic">Analyzing HbA1c History...</p>
         </Card>
       </div>
     );
@@ -42,15 +44,15 @@ export function DiagnosticsCharts({ glucoseData, hba1cData }: DiagnosticsChartsP
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-primary" />
-            Fasting Blood Glucose Trend
+            Blood Glucose Trend
           </CardTitle>
-          <CardDescription>Values measured in mg/dL over the last 6 months</CardDescription>
+          <CardDescription>Measured in mg/dL over the last 6 months</CardDescription>
         </CardHeader>
         <CardContent className="h-[300px]">
           <ChartContainer config={{ value: { label: "Glucose", color: "hsl(var(--primary))" } }}>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={glucoseData}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                 <XAxis 
                   dataKey="date" 
                   tickLine={false}
@@ -67,9 +69,9 @@ export function DiagnosticsCharts({ glucoseData, hba1cData }: DiagnosticsChartsP
                   type="monotone" 
                   dataKey="value" 
                   stroke="var(--color-value)" 
-                  strokeWidth={2} 
-                  dot={{ r: 4 }} 
-                  activeDot={{ r: 6 }} 
+                  strokeWidth={3} 
+                  dot={{ r: 4, fill: "var(--color-value)" }} 
+                  activeDot={{ r: 6, strokeWidth: 0 }} 
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -89,7 +91,7 @@ export function DiagnosticsCharts({ glucoseData, hba1cData }: DiagnosticsChartsP
           <ChartContainer config={{ value: { label: "HbA1c", color: "hsl(var(--accent))" } }}>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={hba1cData}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                 <XAxis 
                   dataKey="date"
                   tickLine={false}
@@ -106,9 +108,9 @@ export function DiagnosticsCharts({ glucoseData, hba1cData }: DiagnosticsChartsP
                   type="monotone" 
                   dataKey="value" 
                   stroke="var(--color-value)" 
-                  strokeWidth={2} 
-                  dot={{ r: 4 }} 
-                  activeDot={{ r: 6 }} 
+                  strokeWidth={3} 
+                  dot={{ r: 4, fill: "var(--color-value)" }} 
+                  activeDot={{ r: 6, strokeWidth: 0 }} 
                 />
               </LineChart>
             </ResponsiveContainer>

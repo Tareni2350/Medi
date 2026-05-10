@@ -10,15 +10,17 @@ MediSync AI is a universal healthcare interoperability platform. It addresses th
 - **Export to PDF:** Generate professional, clean clinical reports for offline use.
 - **Admin Portal:** Secure interface for healthcare administrators to register patients and manage clinical records.
 
+## Tech Stack & Purpose
+
+- **Next.js 15 (App Router):** Application framework for routing and high-performance server-side rendering.
+- **Tailwind CSS:** Utility-first styling for responsive and modern UI design.
+- **ShadCN UI:** Reusable, accessible UI components for a professional clinical interface.
+- **Lucide-React:** Modern iconography for intuitive clinical navigation.
+- **Recharts:** Data visualization for longitudinal health trends and lab marker analysis.
+- **TypeScript:** Type-safe data modeling to ensure accuracy in medical record handling.
+
 ## Data
 This project uses synthetic clinical data structured according to ABDM guidelines, demonstrating interoperability across fragmented healthcare nodes.
-
-## Tech Stack
-
-- **Framework:** Next.js (App Router)
-- **Styling:** Tailwind CSS & ShadCN UI
-- **Icons:** Lucide-React
-- **Charts:** Recharts
 
 ## Getting Started
 
